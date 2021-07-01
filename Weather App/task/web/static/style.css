@@ -1,0 +1,173 @@
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+	grid-gap: 1vw;
+	grid-auto-rows: 30vw;
+	padding-left: 20%;
+	padding-right: 20%;
+	margin-bottom: 2vw;
+	justify-content: center;
+}
+.card {
+	padding: 0;
+	border: none;
+	box-shadow: 0 0 1vw rgba(0,0,0,0.5);
+	background-size: cover;
+	border-radius: 0.5vw !important;
+	color: white;
+	font-weight: 600;
+	text-shadow: 0px 0px 1vw rgba(0,0,0,0.7);
+}
+
+html, body {
+	min-height: 100vh;
+	background: linear-gradient(#836273, #373252);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	padding: 0;
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.form {
+	margin-top: 7%;
+	padding-left: 10%;
+	padding-right: 10%;
+	text-align: center;
+	font-size: 1vw;
+	margin-bottom: 3%;
+}
+
+input {
+	border: none;
+	outline: none;
+	height: 3vw;
+	width: 40vw;
+	padding-left: 0.5vw;
+	box-shadow: 0 0 1vw rgba(0,0,0,0.5);
+}
+
+.submit-button {
+	margin-left: 1vw;
+	height: 3vw;
+	width: 9vw;
+	border: none;
+	outline: none !important;
+	background-color: #373252;
+	color: white;
+	box-shadow: 0 0 1vw rgba(0,0,0,0.5);
+}
+
+.night {
+	background-image: url("/static/img/night.jpg");
+}
+
+.day {
+	background-image: url("/static/img/day.jpg");
+}
+
+.evening-morning {
+	background-image: url("/static/img/evening-morning.jpg");
+}
+
+.wrapper {
+	min-height: 100vh;
+}
+
+
+.delete-wrapper {
+	text-align: right;
+	font-size: 1vw;
+	height: 20%;
+	width: 100%;
+	padding-right: 0.5vw;
+	padding-top: 0.4vw;
+}
+
+.degrees {
+	text-align: center;
+	font-size: 2.5vw;
+	height: 10%;
+}
+
+.day > .degrees {
+	color: black;
+}
+
+.state {
+	text-align: center;
+	font-size: 1.5vw;
+}
+
+.day > .state {
+	color: black;
+}
+
+.city {
+	text-align: center;
+	height: 70%;
+	font-size: 2vw;
+	display: flex;
+	justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 6%;
+}
+
+.day > .state {
+	color: black;
+}
+
+
+.alert {
+	text-align: center;
+	width: 30vw;
+	margin: auto;
+	margin-bottom: 1vw;
+	background-color: #373252;
+	color: white;
+	border: none;
+	padding: 0.5vw;
+	border-radius: 0.4vw;
+	margin-top: -3%;
+}
+
+.celsius {
+	font-size: 1.75vw;
+}
+
+.delete-button {
+	background-color: transparent;
+	width: 1.5vw;
+	height: 1vw;
+	margin: 0;
+	padding: 0;
+	border: none;
+	color: white;
+}
+
+.day > .delete-wrapper > form > .delete-button {
+	color: black !important;
+}
+
+.delete-button:focus, .delete-button:active {
+	border: none;
+	outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.5vw;
+
+  background:-webkit-linear-gradient(0, blue 50%, white 100%);
+}
+
+::-webkit-scrollbar-track {
+  background:  linear-gradient(0deg, #836273 0%, #373252 100%);
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+

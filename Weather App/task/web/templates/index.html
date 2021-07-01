@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="shortcut icon" href="https://img.icons8.com/fluent/48/000000/rainy-weather.png" type="image/x-icon"/>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="form">
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+    <div class="alert alert-primary" role="alert">
+        {{message[0]}}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <form action="/" method="POST">
+        <input type="text" placeholder="Enter a city name" name="city_name" id="input-city">
+        <button type="submit" class="submit-button">Add</button>
+    </form>
+</div>
+<div class="cards">
+    <div class="card night">
+        <div class="delete-wrapper">
+            <form action="#" method="POST">
+                <input type="hidden" name="id" value="">
+                <button class="delete-button" type="submit">&#10006;</button>
+            </form>
+        </div>
+        <div class="degrees"><span>9<span class="celsius"> °C</span></span></div>
+        <div class="state">Chilly</div>
+        <div class="city">BOSTON</div>
+    </div>
+
+    <div class="card day">
+        <div class="delete-wrapper">
+            <form action="#" method="POST">
+                <input type="hidden" name="id" value="">
+                <button class="delete-button" type="submit">&#10006;</button>
+            </form>
+        </div>
+        <div class="degrees"><span>32<span class="celsius"> °C</span></span></div>
+        <div class="state">Sunny</div>
+        <div class="empty"></div>
+        <div class="city">NEW YORK</div>
+    </div>
+
+    <div class="card evening-morning">
+        <div class="delete-wrapper">
+            <form action="#" method="POST">
+                <input type="hidden" name="id" value="">
+                <button class="delete-button" type="submit">&#10006;</button>
+            </form>
+        </div>
+        <div class="degrees"><span>-15<span class="celsius"> °C</span></span></div>
+        <div class="state">Cold</div>
+        <div class="empty"></div>
+        <div class="city">EDMONTON</div>
+    </div>
+</div>
+</body>
+</html>
