@@ -63,6 +63,21 @@
         <div class="empty"></div>
         <div class="city">EDMONTON</div>
     </div>
+
+    {% if weather %}
+    <div class="card evening-morning">
+        <div class="delete-wrapper">
+            <form action="#" method="POST">
+                <input type="hidden" name="id" value="">
+                <button class="delete-button" type="submit">&#10006;</button>
+            </form>
+        </div>
+        <div class="degrees"><span>{{ weather.degrees }}<span class="celsius"> °C</span></span></div>
+        <div class="state">{{ weather.state }}</div>
+        <div class="empty"></div>
+        <div class="city">{{ weather.city }}</div>
+    </div>
+    {% endif %}
 </div>
 </body>
 </html>

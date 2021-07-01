@@ -156,5 +156,8 @@ files:
         FlaskProjectTest().run_tests()
   learner_created: false
 feedback_link: https://hyperskill.org/projects/164/stages/853/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Thu, 01 Jul 2021 22:52:58 UTC
 record: -1
