@@ -1,0 +1,5 @@
+https://github.com/hyperskill/hs-test-python/archive/release.tar.gz
+Flask~=1.1.2
+pyppeteer~=0.2.5
+urllib3<1.25
+requests

@@ -1,0 +1,168 @@
+hyperskill_project:
+  id: 164
+  ide_files: https://stepik.org/media/attachments/lesson/494358/additional_files.json
+  is_template_based: false
+  use_ide: true
+update_date: Thu, 01 Jan 1970 00:00:00 UTC
+stages:
+- id: 851
+  step: 12325
+  is_completed: false
+- id: 852
+  step: 12326
+  is_completed: false
+- id: 853
+  step: 12327
+  is_completed: false
+- id: 854
+  step: 12328
+  is_completed: false
+- id: 855
+  step: 12329
+  is_completed: false
+topics:
+  0:
+  - title: Computer programming
+    theory_id: 8739
+  - title: Introduction to OOP
+    theory_id: 3614
+  - title: Introduction to Python
+    theory_id: 5204
+  - title: Overview of the basic program
+    theory_id: 5208
+  - title: Multi-line programs
+    theory_id: 5233
+  - title: PEP 8
+    theory_id: 5879
+  - title: Comments
+    theory_id: 6081
+  - title: Invoking a function
+    theory_id: 5891
+  - title: Declaring a function
+    theory_id: 5900
+  - title: Scopes
+    theory_id: 6322
+  - title: Arguments
+    theory_id: 7248
+  - title: Function decorators
+    theory_id: 10103
+  - title: Class
+    theory_id: 6661
+  - title: Class instances
+    theory_id: 6669
+  - title: Basic data types
+    theory_id: 5852
+  - title: Integer arithmetic
+    theory_id: 5865
+  - title: Variables
+    theory_id: 5859
+  - title: List
+    theory_id: 5979
+  1:
+  - title: World Wide Web
+    theory_id: 6633
+  - title: HyperText Transfer Protocol
+    theory_id: 6569
+  - title: HTTP URL
+    theory_id: 6740
+  - title: HTML basics
+    theory_id: 6434
+  - title: Tags and attributes
+    theory_id: 7536
+  - title: HTML page structure
+    theory_id: 6491
+  - title: Block-level elements
+    theory_id: 7271
+  - title: Inline Elements
+    theory_id: 7518
+  - title: Comments
+    theory_id: 7502
+  - title: What is CSS
+    theory_id: 7678
+  - title: Connecting CSS to HTML
+    theory_id: 7418
+  2:
+  - title: HTTP messages
+    theory_id: 6752
+  - title: Introduction to operating systems
+    theory_id: 9704
+  - title: Naming variables
+    theory_id: 5885
+  - title: Taking input
+    theory_id: 5913
+  - title: Program with numbers
+    theory_id: 5872
+  - title: If statement
+    theory_id: 5953
+  - title: For loop
+    theory_id: 6065
+  - title: Load module
+    theory_id: 6019
+  - title: Create module
+    theory_id: 6057
+  - title: Packages
+    theory_id: 6384
+  - title: Datetime module
+    theory_id: 7324
+  - title: Command line overview
+    theory_id: 8977
+  - title: Parameters and options
+    theory_id: 9746
+  - title: Pip
+    theory_id: 6230
+  - title: 'Requests: retrieving data'
+    theory_id: 8603
+  - title: 'Requests: manipulating data'
+    theory_id: 8681
+  - title: Boolean logic
+    theory_id: 6025
+  - title: Comparisons
+    theory_id: 5920
+  - title: Dictionary
+    theory_id: 6481
+  - title: Dictionary methods
+    theory_id: 9008
+  - title: Operations with dictionary
+    theory_id: 11096
+  3:
+  - title: Files
+    theory_id: 13025
+  - title: Introduction to databases
+    theory_id: 8497
+  - title: What is SQL
+    theory_id: 7054
+  - title: Basic data types
+    theory_id: 7123
+  - title: Basic CREATE statement
+    theory_id: 9084
+  - title: Alter table
+    theory_id: 9579
+  - title: PRIMARY KEY constraint
+    theory_id: 9781
+  - title: FOREIGN KEY constraint
+    theory_id: 9789
+  - title: Basic INSERT statement
+    theory_id: 9059
+  - title: Introduction to SQLite
+    theory_id: 12165
+  - title: Introduction to logging
+    theory_id: 5538
+  - title: Data and object mapping
+    theory_id: 8262
+  - title: Object-Relational Mapping (ORM)
+    theory_id: 8312
+  - title: Intro to SQL Alchemy
+    theory_id: 12935
+  4:
+  - title: Program execution
+    theory_id: 6047
+  - title: Errors
+    theory_id: 6052
+  - title: Exceptions
+    theory_id: 6042
+  - title: Files in Python
+    theory_id: 8691
+  - title: Built-in exceptions
+    theory_id: 11680
+  - title: Exception handling
+    theory_id: 6270

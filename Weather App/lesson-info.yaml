@@ -1,0 +1,8 @@
+type: framework
+content:
+- Nice to meet you, Flask
+- Beautiful template
+- What's the weather today?
+- Healing potion
+- Wrong city
+current_task: 0

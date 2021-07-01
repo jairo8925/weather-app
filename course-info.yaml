@@ -1,0 +1,11 @@
+type: hyperskill
+title: Weather App
+language: English
+summary: There are many reasons why it is important to know the weather. It helps
+  people make important decisions about the day. The weather may influence many different
+  things from clothes to wear during a cold day to whether it is safe to fly an airplane.<br/><br/>Learn
+  more at <a href="https://hyperskill.org">https://hyperskill.org/projects/164</a>
+programming_language: Python
+content:
+- Weather App
+mode: Study
