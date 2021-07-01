@@ -21,18 +21,18 @@ def add_city():
     city_name = request.form['city_name']
 
     r = requests.get(url, params={'q': city_name, 'appid': api_key, 'units': 'metric'})
-    weather_info = r.json()
+    data = r.json()
 
     # print("NAME:", weather_info.get('name'))
     # print("TEMP:", weather_info.get('main').get('temp'))
     # print("DESC:", weather_info.get('weather')[0].get('main'))
 
-    city = weather_info.get('name').upper()
-    degrees = round(int(weather_info.get('main').get('temp')))
-    state = weather_info.get('weather')[0].get('main')
+    city = data.get('name').upper()
+    degrees = round(int(data.get('main').get('temp')))
+    state = data.get('weather')[0].get('main')
 
-    offset = int(weather_info.get('timezone'))
-    ts = int(weather_info.get('dt')) + offset
+    offset = int(data.get('timezone'))
+    ts = int(data.get('dt')) + offset
     local_hour = int(datetime.utcfromtimestamp(ts).strftime('%H'))
 
     day_state = None
