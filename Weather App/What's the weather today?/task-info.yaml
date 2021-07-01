@@ -155,9 +155,12 @@ files:
     if __name__ == '__main__':
         FlaskProjectTest().run_tests()
   learner_created: false
+- name: web/templates/add.html
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/164/stages/853/implement#comment
 status: Solved
 feedback:
   message: Congratulations!
-  time: Thu, 01 Jul 2021 22:52:58 UTC
+  time: Thu, 01 Jul 2021 23:23:46 UTC
 record: -1

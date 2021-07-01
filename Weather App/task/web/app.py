@@ -16,7 +16,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/', methods=['POST'])
+@app.route('/add', methods=['POST'])
 def add_city():
     city_name = request.form['city_name']
 
@@ -28,20 +28,30 @@ def add_city():
     # print("DESC:", weather_info.get('weather')[0].get('main'))
 
     city = weather_info.get('name').upper()
-    degrees = weather_info.get('main').get('temp')
+    degrees = round(int(weather_info.get('main').get('temp')))
     state = weather_info.get('weather')[0].get('main')
 
     offset = int(weather_info.get('timezone'))
     ts = int(weather_info.get('dt')) + offset
-    hour = int(datetime.utcfromtimestamp(ts).strftime('%H'))
-    print(hour)
+    local_hour = int(datetime.utcfromtimestamp(ts).strftime('%H'))
 
-    dict_with_weather_info = {'city': city, 'degrees': degrees, 'state': state, 'time': hour}
+    day_state = None
+    if 6 <= int(local_hour) <= 16:
+        day_state = 'day'
+    elif 17 <= int(local_hour) <= 23:
+        day_state = 'evening-morning'
+    elif 0 <= int(local_hour) <= 5:
+        day_state = 'night'
+
+    dict_with_weather_info = {'city': city,
+                              'degrees': degrees,
+                              'state': state,
+                              'day_state': day_state}
 
     if all(dict_with_weather_info.values()):
-        return render_template('index.html', weather=dict_with_weather_info)
+        return render_template('add.html', weather=dict_with_weather_info)
     else:
-        sys.exit("Dictionary has None values")
+        return render_template('index.html'), 404
 
 
 # don't change the following way to run flask:
