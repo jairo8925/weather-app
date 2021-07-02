@@ -1,6 +1,7 @@
 import os
 import sys
 import requests
+import string
 from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -23,7 +24,7 @@ class City(db.Model):
     name = db.Column(db.String(40), unique=True, nullable=False)
     degrees = db.Column(db.Integer)
     state = db.Column(db.String(40), nullable=False)
-    day_state = db.Column(db.String(20), nullable=False)
+    time_of_day = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
         return '<City %r>' % self.name
@@ -40,7 +41,7 @@ def index():
     cities_info = []
 
     for c in cities_list:
-        weather_info = {'id': c.id, 'city': c.name, 'degrees': c.degrees, 'state': c.state, 'day_state': c.day_state}
+        weather_info = {'id': c.id, 'city': c.name, 'degrees': c.degrees, 'state': c.state, 'time_of_day': c.time_of_day}
         cities_info.append(weather_info)
 
     return render_template('index.html', cities=cities_info)
@@ -64,15 +65,15 @@ def add():
             return redirect(url_for('index'))
 
         degrees = round(int(data.get('main').get('temp')))
-        state = data.get('weather')[0].get('main')
+        state = string.capwords(data.get('weather')[0].get('description'))
 
         offset = int(data.get('timezone'))
         dt = int(data.get('dt'))
         local_hour = get_local_hour(dt, offset)
 
-        day_state = get_background_image(local_hour)
+        time_of_day = get_background_image(local_hour)
 
-        db.session.add(City(name=city_name, degrees=degrees, state=state, day_state=day_state))
+        db.session.add(City(name=city_name, degrees=degrees, state=state, time_of_day=time_of_day))
         db.session.commit()
 
     return redirect(url_for('index'))
