@@ -2,7 +2,7 @@ import os
 import sys
 import requests
 from datetime import datetime
-from flask import Flask, abort, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -37,7 +37,6 @@ def index():
     for c in cities_list:
         r = requests.get(url, params={'q': c.name, 'appid': api_key, 'units': 'metric'})
 
-        print(r.status_code)
         if r.status_code == 200:
             data = r.json()
         else:
