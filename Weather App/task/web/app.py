@@ -49,14 +49,14 @@ def index():
 
 @app.route('/add', methods=['POST'])
 def add():
-    city_name = request.form['city_name'].capitalize()
+    city_name = string.capwords(request.form['city_name'])
     exists = db.session.query(City.id).filter_by(name=city_name).first() is not None
     if exists:
         flash("The city has already been added to the list!")
         app.config.update(SECRET_KEY=os.urandom(24))
         return redirect(url_for('index'))
     else:
-        r = requests.get(url, params={'q': city_name, 'appid': api_key, 'units': 'metric'})
+        r = requests.get(url, params={'q': city_name, 'appid': api_key, 'units': 'imperial'})
         if r.status_code == 200:
             data = r.json()
         else:
