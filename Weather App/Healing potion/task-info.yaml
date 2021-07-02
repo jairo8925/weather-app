@@ -228,6 +228,29 @@ files:
     if __name__ == '__main__':
         FlaskProjectTest().run_tests()
   learner_created: false
+- name: web/templates/add.html
+  visible: true
+  text: |
+    {% extends 'index.html' %}
+
+    {% block card %}
+        <div class="card {{ weather.day_state }}">
+            <div class="delete-wrapper">
+                <form action="#" method="POST">
+                    <input type="hidden" name="id" value="">
+                    <button class="delete-button" type="submit">&#10006;</button>
+                </form>
+            </div>
+            <div class="degrees"><span>{{ weather.degrees }}<span class="celsius"> °C</span></span></div>
+            <div class="state">{{ weather.state }}</div>
+            <div class="empty"></div>
+            <div class="city">{{ weather.city }}</div>
+        </div>
+    {% endblock %}
+  learner_created: true
+- name: web/api-key.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/164/stages/854/implement#comment
 status: Unchecked
-record: -1
+record: 4

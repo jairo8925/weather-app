@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -7,7 +9,12 @@ import sys
 
 app = Flask(__name__)
 
-api_key = 'e07b8023530957662796387e1eca0337'
+try:
+    api_key = str(os.environ["API_KEY"])
+except KeyError:
+    print("Can't find api_key!")
+    sys.exit()
+
 url = 'https://api.openweathermap.org/data/2.5/weather'
 
 
@@ -19,9 +26,13 @@ def index():
 @app.route('/add', methods=['POST'])
 def add_city():
     city_name = request.form['city_name']
-
     r = requests.get(url, params={'q': city_name, 'appid': api_key, 'units': 'metric'})
-    data = r.json()
+
+    if r.status_code == 200:
+        data = r.json()
+    else:
+        print("Can't make connection to website. Try again.")
+        sys.exit()
 
     # print("NAME:", weather_info.get('name'))
     # print("TEMP:", weather_info.get('main').get('temp'))
