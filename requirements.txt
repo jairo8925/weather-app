@@ -1,4 +1,4 @@
-https://github.com/hyperskill/hs-test-python/archive/release.tar.gz
+flask-sqlalchemy
 Flask~=1.1.2
 pyppeteer~=0.2.5
 urllib3

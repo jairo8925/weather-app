@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///weather.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.urandom(24)
 db = SQLAlchemy(app)
 url = 'https://api.openweathermap.org/data/2.5/weather'
@@ -19,7 +20,10 @@ except KeyError:
 
 class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
+    name = db.Column(db.String(40), unique=True, nullable=False)
+    degrees = db.Column(db.Integer)
+    state = db.Column(db.String(40), nullable=False)
+    day_state = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
         return '<City %r>' % self.name
@@ -34,20 +38,31 @@ def index():
     query = City.query.all()
     cities_list = [x for x in query]
     cities_info = []
-    for c in cities_list:
-        r = requests.get(url, params={'q': c.name, 'appid': api_key, 'units': 'metric'})
 
+    for c in cities_list:
+        weather_info = {'id': c.id, 'city': c.name, 'degrees': c.degrees, 'state': c.state, 'day_state': c.day_state}
+        cities_info.append(weather_info)
+
+    return render_template('index.html', cities=cities_info)
+
+
+@app.route('/add', methods=['POST'])
+def add():
+    city_name = request.form['city_name'].capitalize()
+    exists = db.session.query(City.id).filter_by(name=city_name).first() is not None
+    if exists:
+        flash("The city has already been added to the list!")
+        app.config.update(SECRET_KEY=os.urandom(24))
+        return redirect(url_for('index'))
+    else:
+        r = requests.get(url, params={'q': city_name, 'appid': api_key, 'units': 'metric'})
         if r.status_code == 200:
             data = r.json()
         else:
             flash("The city doesn't exist!")
             app.config.update(SECRET_KEY=os.urandom(24))
-            city = City.query.filter_by(name=c.name).first()
-            db.session.delete(city)
-            db.session.commit()
-            return redirect('/')
+            return redirect(url_for('index'))
 
-        city = data.get('name').upper()
         degrees = round(int(data.get('main').get('temp')))
         state = data.get('weather')[0].get('main')
 
@@ -57,25 +72,9 @@ def index():
 
         day_state = get_background_image(local_hour)
 
-        weather_info = {'id': c.id, 'city': city, 'degrees': degrees, 'state': state, 'day_state': day_state}
-
-        if all(weather_info.values()):
-            cities_info.append(weather_info)
-
-    return render_template('index.html', cities=cities_info)
-
-
-@app.route('/add', methods=['POST'])
-def add():
-    city_name = request.form['city_name']
-    exists = db.session.query(City.id).filter_by(name=city_name).first() is not None
-    if exists:
-        flash("The city has already been added to the list!")
-        app.config.update(SECRET_KEY=os.urandom(24))
-        return redirect('/')
-    else:
-        db.session.add(City(name=city_name))
+        db.session.add(City(name=city_name, degrees=degrees, state=state, day_state=day_state))
         db.session.commit()
+
     return redirect(url_for('index'))
 
 
@@ -84,7 +83,7 @@ def delete(city_id):
     city = City.query.filter_by(id=city_id).first()
     db.session.delete(city)
     db.session.commit()
-    return redirect('/')
+    return redirect(url_for('index'))
 
 
 def get_background_image(hour):
