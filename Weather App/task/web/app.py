@@ -30,7 +30,7 @@ class City(db.Model):
         return '<City %r>' % self.name
 
 
-db.drop_all()
+# db.drop_all()
 db.create_all()
 
 
