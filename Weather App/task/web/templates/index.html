@@ -29,7 +29,7 @@
     {% for city in cities %}
         <div class="card {{ city.day_state }}">
         <div class="delete-wrapper">
-            <form action="#" method="POST">
+            <form action="/delete/{{ city.id }}" method="POST">
                 <input type="hidden" name="id" value="">
                 <button class="delete-button" type="submit">&#10006;</button>
             </form>

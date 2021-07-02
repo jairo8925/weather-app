@@ -331,6 +331,13 @@ files:
     if __name__ == '__main__':
         FlaskProjectTest().run_tests()
   learner_created: false
+- name: web/weather.db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/164/stages/855/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Fri, 02 Jul 2021 07:14:17 UTC
 record: -1

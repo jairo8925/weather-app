@@ -19,7 +19,7 @@ stages:
   is_completed: true
 - id: 855
   step: 12329
-  is_completed: false
+  is_completed: true
 topics:
   0:
   - title: Computer programming

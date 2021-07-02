@@ -69,6 +69,10 @@ class FlaskProjectTest(FlaskTest):
             if city is None:
                 raise WrongAnswer(
                     "One of the <div> blocks with card class 'card' doesn't contain <div> block with class 'city'")
+            button = await card.querySelector('button.delete-button')
+            if button is None:
+                raise WrongAnswer(
+                    "One of the <div> blocks with card class 'card' doesn't contain a button with class 'delete-button'")
 
     async def test_response_async(self):
         browser = await self.launch_and_get_browser()
@@ -108,7 +112,7 @@ class FlaskProjectTest(FlaskTest):
 
         await self.check_cards_in_the_page(page, 0)
 
-        await browser.close()
+        await self.close_browser(browser)
 
         return CheckResult.correct()
 
@@ -201,6 +205,105 @@ class FlaskProjectTest(FlaskTest):
     @dynamic_test(order=5)
     def test_refresh(self):
         asyncio.get_event_loop().run_until_complete(self.test_refresh_async())
+        return CheckResult.correct()
+
+    async def test_flash_message_async(self):
+        print(123123)
+        browser = await self.launch_and_get_browser()
+        page = await browser.newPage()
+        await page.goto(self.get_url())
+
+        input_field = await self.get_input_field(page)
+        await input_field.type('Idaho')
+
+        button = await self.get_submit_button(page)
+
+        await asyncio.gather(
+            page.waitForNavigation(),
+            button.click(),
+        )
+
+        input_field = await self.get_input_field(page)
+        await input_field.type('Idaho')
+
+        button = await self.get_submit_button(page)
+
+        await asyncio.gather(
+            page.waitForNavigation(),
+            button.click(),
+        )
+
+        html = await page.content()
+
+        if 'The city has already been added to the list!' not in html:
+            raise WrongAnswer(
+                f'If the user tires to add a city that is already was added you should print '
+                f'"The city has already been added to the list!"')
+
+        input_field = await self.get_input_field(page)
+        await input_field.type('The city that doesn\'t exist!')
+
+        button = await self.get_submit_button(page)
+
+        await asyncio.gather(
+            page.waitForNavigation(),
+            button.click(),
+        )
+
+        html = await page.content()
+
+        if 'The city doesn\'t exist!' not in html:
+            raise WrongAnswer(
+                f'If the user tires to add a city that is already was added you should print "The city doesn\'t exist!"')
+
+    @dynamic_test(order=6)
+    def test_flash_message(self):
+        asyncio.get_event_loop().run_until_complete(self.test_flash_message_async())
+        return CheckResult.correct()
+
+    async def test_delete_card_async(self):
+        browser = await self.launch_and_get_browser()
+        page = await browser.newPage()
+        await page.goto(self.get_url())
+
+        await self.check_cards_in_the_page(page, 3)
+
+        cards = await page.querySelectorAll('div.card')
+        card = cards[0]
+        delete_button = await card.querySelector('button.delete-button')
+
+        await asyncio.gather(
+            page.waitForNavigation(),
+            delete_button.click(),
+        )
+
+        await self.check_cards_in_the_page(page, 2)
+
+        cards = await page.querySelectorAll('div.card')
+        card = cards[0]
+        delete_button = await card.querySelector('button.delete-button')
+
+        await asyncio.gather(
+            page.waitForNavigation(),
+            delete_button.click(),
+        )
+
+        await self.check_cards_in_the_page(page, 1)
+
+        cards = await page.querySelectorAll('div.card')
+        card = cards[0]
+        delete_button = await card.querySelector('button.delete-button')
+
+        await asyncio.gather(
+            page.waitForNavigation(),
+            delete_button.click(),
+        )
+
+        await self.check_cards_in_the_page(page, 0)
+
+    @dynamic_test(order=7)
+    def test_delete_card(self):
+        asyncio.get_event_loop().run_until_complete(self.test_delete_card_async())
         return CheckResult.correct()
 
 
