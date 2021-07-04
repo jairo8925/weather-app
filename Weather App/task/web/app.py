@@ -24,7 +24,7 @@ except KeyError:
 class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), unique=True, nullable=False)
-    degrees = db.Column(db.Integer)
+    degrees = db.Column(db.Float)
     state = db.Column(db.String(40), nullable=False)
     time_of_day = db.Column(db.String(20), nullable=False)
 
@@ -35,18 +35,33 @@ class City(db.Model):
 db.drop_all()
 db.create_all()
 
+is_fahrenheit = True
+
 
 @app.route('/')
 def index():
     query = City.query.all()
     cities_list = [x for x in query]
     cities_info = []
+    if is_fahrenheit:
+        for c in cities_list:
+            degree_fahrenheit = round((c.degrees - 273.15) * (9/5) + 32)
+            weather_info = {'id': c.id, 'city': c.name, 'degrees': degree_fahrenheit, 'state': c.state, 'time_of_day': c.time_of_day}
+            cities_info.append(weather_info)
+    else:
+        for c in cities_list:
+            degree_celsius = round(c.degrees - 273.15)
+            weather_info = {'id': c.id, 'city': c.name, 'degrees': degree_celsius, 'state': c.state, 'time_of_day': c.time_of_day}
+            cities_info.append(weather_info)
 
-    for c in cities_list:
-        weather_info = {'id': c.id, 'city': c.name, 'degrees': c.degrees, 'state': c.state, 'time_of_day': c.time_of_day}
-        cities_info.append(weather_info)
+    return render_template('index.html', cities=cities_info, is_fahrenheit=is_fahrenheit)
 
-    return render_template('index.html', cities=cities_info)
+
+@app.route('/switch_units', methods=['GET'])
+def switch():
+    global is_fahrenheit
+    is_fahrenheit = not is_fahrenheit
+    return redirect(url_for('index'))
 
 
 @app.route('/add', methods=['POST'])
@@ -58,7 +73,7 @@ def add():
         app.config.update(SECRET_KEY=os.urandom(24))
         return redirect(url_for('index'))
     else:
-        r = requests.get(url, params={'q': city_name, 'appid': api_key, 'units': 'imperial'})
+        r = requests.get(url, params={'q': city_name, 'appid': api_key})
         if r.status_code == 200:
             data = r.json()
         else:
@@ -66,7 +81,7 @@ def add():
             app.config.update(SECRET_KEY=os.urandom(24))
             return redirect(url_for('index'))
 
-        degrees = round(int(data.get('main').get('temp')))
+        degrees = int(data.get('main').get('temp'))
         state = string.capwords(data.get('weather')[0].get('description'))
 
         offset = int(data.get('timezone'))

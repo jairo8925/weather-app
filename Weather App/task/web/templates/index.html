@@ -20,6 +20,17 @@
     </div>
     {% endif %}
     {% endwith %}
+    {% if is_fahrenheit %}
+    <form action="/switch_units" method="GET">
+        <input type="checkbox" name="check" onchange="this.form.submit();">
+        <span class="slider"></span>
+    </form>
+    {% else %}
+    <form action="/switch_units" method="GET">
+        <input type="checkbox" name="check" checked onchange="this.form.submit();">
+        <span class="slider"></span>
+    </form>
+    {% endif %}
     <form action="/add" method="POST">
         <input type="text" placeholder="Enter a city name" name="city_name" id="input-city">
         <button type="submit" class="submit-button">Add</button>
@@ -34,7 +45,11 @@
                 <button class="delete-button" type="submit">&#10006;</button>
             </form>
         </div>
+        {% if is_fahrenheit %}
         <div class="degrees"><span>{{ city.degrees }}<span class="fahrenheit"> °F</span></span></div>
+        {% else %}
+        <div class="degrees"><span>{{ city.degrees }}<span class="fahrenheit"> °C</span></span></div>
+        {% endif %}
         <div class="state">{{ city.state }}</div>
         <div class="empty"></div>
         <div class="city">{{ city.city }}</div>
