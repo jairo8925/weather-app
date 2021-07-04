@@ -8,5 +8,5 @@ A web application made with Flask that works with a weather service API to get t
 ## TODO
 
 - add switch between Celsius and Fahrenheit
-- ask for state code and country code (opitonal) for accuracy
+- ask for state code and country code (optional) for accuracy
 - host at Firebase
