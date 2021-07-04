@@ -2,6 +2,7 @@ import os
 import sys
 import requests
 import string
+import base64
 from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -14,7 +15,8 @@ db = SQLAlchemy(app)
 url = 'https://api.openweathermap.org/data/2.5/weather'
 
 try:
-    api_key = str(os.environ["API_KEY"])
+    # api_key = str(os.environ["API_KEY"])
+    api_key = base64.b64decode("ZDY3NTVhYTIxZWE2NzJjZGUxYzQ0MDlmZmQwOWI0MGM=")
 except KeyError:
     sys.exit("Can't find api_key!")
 
