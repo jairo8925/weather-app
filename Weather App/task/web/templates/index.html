@@ -46,9 +46,9 @@
             </form>
         </div>
         {% if is_fahrenheit %}
-        <div class="degrees"><span>{{ city.degrees }}<span class="fahrenheit"> °F</span></span></div>
+        <div class="degrees"><span>{{ city.degrees }}<span class="degree-unit"> °F</span></span></div>
         {% else %}
-        <div class="degrees"><span>{{ city.degrees }}<span class="fahrenheit"> °C</span></span></div>
+        <div class="degrees"><span>{{ city.degrees }}<span class="degree-unit"> °C</span></span></div>
         {% endif %}
         <div class="state">{{ city.state }}</div>
         <div class="empty"></div>
