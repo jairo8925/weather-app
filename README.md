@@ -9,3 +9,4 @@ A web application made with Flask that works with a weather service API to get t
 
 - add switch between Celsius and Fahrenheit
 - ask for state code and country code (opitonal) for accuracy
+- host at Firebase
