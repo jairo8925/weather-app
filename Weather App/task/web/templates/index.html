@@ -12,6 +12,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<div class="form-units">
+    <form action="/switch_units" method="GET">
+        <label class="switch">
+            {% if is_fahrenheit %}
+            <input type="checkbox" name="degrees_unit" onchange="this.form.submit();">
+            <span class="slider round"></span>
+            {% else %}
+            <input type="checkbox" name="degrees_unit" checked onchange="this.form.submit();">
+            <span class="slider round"></span>
+            {% endif %}
+        </label>
+    </form>
+</div>
 <div class="form">
     {% with message = get_flashed_messages() %}
     {% if message %}
@@ -20,17 +33,6 @@
     </div>
     {% endif %}
     {% endwith %}
-    {% if is_fahrenheit %}
-    <form action="/switch_units" method="GET">
-        <input type="checkbox" name="check" onchange="this.form.submit();">
-        <span class="slider"></span>
-    </form>
-    {% else %}
-    <form action="/switch_units" method="GET">
-        <input type="checkbox" name="check" checked onchange="this.form.submit();">
-        <span class="slider"></span>
-    </form>
-    {% endif %}
     <form action="/add" method="POST">
         <input type="text" placeholder="Enter a city name" name="city_name" id="input-city">
         <button type="submit" class="submit-button">Add</button>

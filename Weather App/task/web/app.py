@@ -43,16 +43,13 @@ def index():
     query = City.query.all()
     cities_list = [x for x in query]
     cities_info = []
-    if is_fahrenheit:
-        for c in cities_list:
-            degree_fahrenheit = round((c.degrees - 273.15) * (9/5) + 32)
-            weather_info = {'id': c.id, 'city': c.name, 'degrees': degree_fahrenheit, 'state': c.state, 'time_of_day': c.time_of_day}
-            cities_info.append(weather_info)
-    else:
-        for c in cities_list:
-            degree_celsius = round(c.degrees - 273.15)
-            weather_info = {'id': c.id, 'city': c.name, 'degrees': degree_celsius, 'state': c.state, 'time_of_day': c.time_of_day}
-            cities_info.append(weather_info)
+    for c in cities_list:
+        if is_fahrenheit:
+            degrees = round((c.degrees - 273.15) * (9/5) + 32)
+        else:
+            degrees = round(c.degrees - 273.15)
+        weather_info = {'id': c.id, 'city': c.name, 'degrees': degrees, 'state': c.state, 'time_of_day': c.time_of_day}
+        cities_info.append(weather_info)
 
     return render_template('index.html', cities=cities_info, is_fahrenheit=is_fahrenheit)
 
