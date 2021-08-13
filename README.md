@@ -4,9 +4,3 @@ A web application made with Flask that works with a weather service API to get t
 
 ![Alt text](images/weather.png?raw=true "Weather App")
 <br></br><br></br>
-
-## TODO
-
-- <s>add switch between Celsius and Fahrenheit</s> DONE
-- ask for state code and country code (optional) for accuracy
-- host at Firebase
